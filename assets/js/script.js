@@ -170,71 +170,80 @@ const perguntas = [
 ];
 
 let questaoAtual = 0;
-    let respostasSelecionadas = {};
+let respostasSelecionadas = {};
 
-    const nivelTexto = document.getElementById("nivel-texto");
-    const perguntaTexto = document.getElementById("pergunta-texto");
-    const opcoesContainer = document.getElementById("opcoes");
-    const botaoSubmit = document.getElementById("submit");
-    const nivelDiv = document.getElementById("nivel");
+const nivelTexto = document.getElementById("nivel-texto");
+const perguntaTexto = document.getElementById("pergunta-texto");
+const opcoesContainer = document.getElementById("opcoes");
+const botaoSubmit = document.getElementById("submit");
+const nivelDiv = document.getElementById("nivel");
 
-    function renderizarQuestao() {
-        const questao = perguntas[questaoAtual];
-        nivelTexto.textContent = `Nível: ${questao.nivel}`;
-        perguntaTexto.textContent = questao.pergunta;
-        opcoesContainer.innerHTML = ""; // Limpa as opções anteriores
-
-        // Define a cor do nível
-        switch (questao.nivel) {
-            case "Fácil":
-                nivelDiv.style.backgroundColor = "#09b12e"; // Verde
-                break;
-            case "Médio":
-                nivelDiv.style.backgroundColor = "#FFA500"; // Laranja
-                break;
-            case "Difícil":
-                nivelDiv.style.backgroundColor = "#FF0000"; // Vermelho
-                break;
-            default:
-                nivelDiv.style.backgroundColor = "#09b12e"; // Verde padrão
-        }
-
-        for (const [letra, texto] of Object.entries(questao.opcoes)) {
-            const label = document.createElement("label");
-            label.innerHTML = 
-                `<input type="radio" name="questao" value="${letra}">
-                ${texto}`;
-            opcoesContainer.appendChild(label);
-        }
+function renderizarQuestao() {
+    const questao = perguntas[questaoAtual];
+    nivelTexto.textContent = `Nível: ${questao.nivel}`;
+    perguntaTexto.textContent = questao.pergunta;
+    opcoesContainer.innerHTML = ""; // Limpa as opções anteriores
+    // Define a cor do nível
+    switch (questao.nivel) {
+        case "Fácil":
+            nivelDiv.style.backgroundColor = "#09b12e"; // Verde
+            break;
+        case "Médio":
+            nivelDiv.style.backgroundColor = "#FFA500"; // Laranja
+            break;
+        case "Difícil":
+            nivelDiv.style.backgroundColor = "#FF0000"; // Vermelho
+            break;
+        default:
+            nivelDiv.style.backgroundColor = "#09b12e"; // Verde padrão
     }
 
-    function proximaQuestao() {
-        const opcaoSelecionada = document.querySelector('input[name="questao"]:checked');
-        if (!opcaoSelecionada) {
-            alert("Por favor, selecione uma resposta!");
-            return;
-        }
-        respostasSelecionadas[questaoAtual] = opcaoSelecionada.value;
-        questaoAtual++;
+    for (const [letra, texto] of Object.entries(questao.opcoes)) {
+        const label = document.createElement("label");
+        label.innerHTML = 
+            `<input type="radio" name="questao" value="${letra}">
+            ${texto}`;
+        opcoesContainer.appendChild(label);
+    }
+}
+
+function proximaQuestao() {
+    const opcaoSelecionada = document.querySelector('input[name="questao"]:checked');
+    const questao = perguntas[questaoAtual]
+
+    if (!opcaoSelecionada) {
+        alert("Por favor, selecione uma resposta!");
+        return;
+    }
+
+    respostasSelecionadas[questaoAtual] = opcaoSelecionada.value;
+    let verificarSelecao = respostasSelecionadas[questaoAtual];
+    questaoAtual++;
+   
+    if (verificarSelecao !== questao.correta) {
+        alert("Você errou!");
+        finalizarQuiz();
+    } else {
         if (questaoAtual < perguntas.length) {
             renderizarQuestao();
         } else {
             finalizarQuiz();
         }
-    }
+    } 
+}
 
-    function finalizarQuiz() {
-        let pontuacao = 0;
-        perguntas.forEach((questao, index) => {
-            if (respostasSelecionadas[index] === questao.correta) {
-                pontuacao++;
-            }
-        });
-        opcoesContainer.innerHTML = `<p>Você acertou ${pontuacao} de ${perguntas.length} perguntas!</p>`;
-        perguntaTexto.textContent = "Quiz Finalizado!";
-        botaoSubmit.style.display = "none";
-    }
+function finalizarQuiz() { 
+    let pontuacao = 0; 
+    perguntas.forEach((questao, index) => { 
+        if (respostasSelecionadas[index] === questao.correta) { 
+            pontuacao++; 
+        } 
+    }); 
+    opcoesContainer.innerHTML = `<p>Você acertou ${pontuacao} de ${perguntas.length} perguntas!</p>`; 
+    perguntaTexto.textContent = "Quiz Finalizado!"; 
+    botaoSubmit.style.display = "none"; 
+} 
 
-    botaoSubmit.addEventListener("click", proximaQuestao);
-    renderizarQuestao();
+botaoSubmit.addEventListener("click", proximaQuestao());
+renderizarQuestao();
 });
