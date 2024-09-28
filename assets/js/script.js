@@ -244,6 +244,6 @@ function finalizarQuiz() {
     botaoSubmit.style.display = "none"; 
 } 
 
-botaoSubmit.addEventListener("click", proximaQuestao());
+botaoSubmit.addEventListener("click", proximaQuestao);
 renderizarQuestao();
 });
