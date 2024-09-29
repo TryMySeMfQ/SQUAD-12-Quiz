@@ -7,7 +7,14 @@
     <title>Quiz Conhecimentos Básicos de um Computador</title>
 </head>
 <body>
-    <div id="quiz">
+    <!-- suelen -->
+    <div id="intro">
+        <h1>Bem-vindo ao Quiz - SQUAD -12!</h1>
+        <p>Teste seus conhecimentos sobre computadores e tecnologia. Boa sorte!</p>
+        <button id="start-quiz">Começar o Quiz</button>
+    </div>
+<!-- ate aqui suelen -->
+    <div id="quiz" style="display: none;">
         <div id="questoes-quiz">
             <div id="barra"></div>
             <div id="nivel">
@@ -21,6 +28,13 @@
             </div>
         </div>
         <button id="submit">Próxima Questão</button>
+    </div>
+
+    <!-- Div para mostrar o GIF de perda victor -->
+    <div id="loss" style="display: none;">
+        <h2>Você perdeu!</h2>
+        <img src="https://giphy.com/gifs/sad-kid-pouting-fhLgA6nJec3Cw" alt="Gif triste">
+        <button id="retry">Tentar Novamente</button>
     </div>
 
     <!-- Importando o arquivo JavaScript -->
