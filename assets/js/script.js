@@ -169,6 +169,18 @@ const perguntas = [
     }
 ];
 
+const botaoIniciar = document.getElementById("start-quiz");
+botaoIniciar.addEventListener("click", iniciarQuiz);
+
+function iniciarQuiz() {
+    const divIniciar = document.getElementById("intro");
+    const divQuiz = document.getElementById("quiz");
+    
+    divIniciar.style.display = "none"
+    divQuiz.style.display = "flex"
+    renderizarQuestao();
+}
+
 let questaoAtual = 0;
 let respostasSelecionadas = {};
 
@@ -246,10 +258,8 @@ function finalizarQuiz() {
     opcoesContainer.innerHTML = `<p>Você acertou ${pontuacao} de ${perguntas.length} perguntas!</p>`; 
     perguntaTexto.textContent = "Quiz Finalizado!"; 
     botaoSubmit.style.display = "none"; 
+    barraProgresso.style.display = "none"; 
 } 
-
-botaoSubmit.addEventListener("click", proximaQuestao);
-renderizarQuestao();
 
 function temporizador() {
     let nivel = perguntas[questaoAtual].nivel;
@@ -291,5 +301,5 @@ function temporizador() {
     });
 
     
-
+    botaoSubmit.addEventListener("click", proximaQuestao);    
 }});
