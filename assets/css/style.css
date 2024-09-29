@@ -130,6 +130,12 @@ body {
     transform: scale(1.05);
 }
 
+#barra {
+    height: 5px;
+    border-radius: 10px;
+    transition: .3s all ease-in-out;
+}
+
 @media (max-width: 480px) {
     #quiz {
         width: 94vw;

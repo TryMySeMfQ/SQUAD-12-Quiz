@@ -172,6 +172,7 @@ const perguntas = [
 let questaoAtual = 0;
 let respostasSelecionadas = {};
 
+const barraProgresso = document.getElementById("barra");
 const nivelTexto = document.getElementById("nivel-texto");
 const perguntaTexto = document.getElementById("pergunta-texto");
 const opcoesContainer = document.getElementById("opcoes");
@@ -205,6 +206,9 @@ function renderizarQuestao() {
             ${texto}`;
         opcoesContainer.appendChild(label);
     }
+    
+    
+    temporizador();
 }
 
 function proximaQuestao() {
@@ -246,4 +250,46 @@ function finalizarQuiz() {
 
 botaoSubmit.addEventListener("click", proximaQuestao);
 renderizarQuestao();
-});
+
+function temporizador() {
+    let nivel = perguntas[questaoAtual].nivel;
+    let valorContagem = 0;
+    let tempoTotal;
+
+
+    if (nivel === "Fácil") {
+        tempoTotal = 15;
+    } else if (nivel === "Médio") {
+        tempoTotal = 10;
+    } else if (nivel === "Difícil") {
+        tempoTotal = 5;
+    } else {
+        alert("Nível Inválido!");
+        return;
+    }
+    
+    barraProgresso.style.backgroundColor = nivelDiv.style.backgroundColor;
+    barraProgresso.style.width = "100%";
+
+    const intervalo = setInterval(() => {
+        valorContagem++;
+        const tempoRestante = tempoTotal - valorContagem;
+
+        const largura = (tempoRestante / tempoTotal) * 100;
+        barraProgresso.style.width = `${largura}%`;
+
+        if (tempoRestante <= 0) {
+            clearInterval(intervalo);
+            barraProgresso.style.width = "0%";
+            barraProgresso.textContent = " ";
+            finalizarQuiz();
+        }
+    }, 1000); 
+
+    botaoSubmit.addEventListener("click", function() {
+        clearInterval(intervalo); 
+    });
+
+    
+
+}});
