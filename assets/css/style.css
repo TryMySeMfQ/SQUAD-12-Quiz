@@ -27,7 +27,9 @@ body {
 	}
 }
 
-#quiz {
+#intro { text-align: center; }
+
+#quiz, #intro{
     width: 40vw;
     height: 80vh;
     display: flex;
@@ -39,12 +41,12 @@ body {
     border-radius: 10px;
 }
 
-#quiz h2 {
+#quiz h2, #intro h1 {
     font-size: 28px;
     color: #343a40; 
 }
 
-#quiz p {
+#quiz p, #intro p {
     font-size: 25px;
     font-weight: 600;
     color: #343a40;
@@ -86,7 +88,7 @@ body {
     font-size: 18px;
     color: #495057;
     padding: 10px;
-    background-color: #0e2de0;
+    background-color: #ffffff;
     border-radius: 8px;
     transition: background-color 0.3s ease;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -102,7 +104,7 @@ body {
     appearance: none;
     width: 1.8rem;
     height: 1.8rem;
-    border: 2px solid #df1414;
+    border: 2px solid #bdc5db;
     border-radius: 50%;
     cursor: pointer;
     margin-right: 1rem;
@@ -114,7 +116,7 @@ body {
     background-color: #00b7ff;
 }
 
-#submit {
+#submit, #start-quiz {
     background-color: #38B6FF;
     border: none;
     color: white;
@@ -125,7 +127,7 @@ body {
     transition: background-color 0.3s ease, transform 0.2s;
 }
 
-#submit:hover {
+#submit:hover, #start-quiz:hover {
     background-color: #007BFF; 
     transform: scale(1.05);
 }
@@ -153,7 +155,7 @@ body {
 .opcao-input {
     margin-right: 10px;
     /* Coloque aqui o estilo do seu input, como cor de fundo, borda, etc */
-    border: 2px solid #8bbb95;
+    border: 2px solid #09b12e;
     border-radius: 5px;
     padding: 5px;
     width: 20px;
@@ -173,9 +175,50 @@ body {
     margin-right: 10px;
 }
 
+#loss {
+    display: none; /* Inicialmente escondido */
+    position: fixed; /* Fixa na tela */
+    top: 50%; /* Centraliza verticalmente */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta para o centro */
+    z-index: 1000; /* Para ficar acima de outros elementos */
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente branco */
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra para destaque */
+    text-align: center; /* Centraliza texto */
+}
+
+/* Estilo para o GIF dentro da div de perda */
+#loss img {
+    max-width: 100%; /* Adapta o tamanho do GIF à largura do contêiner */
+    height: auto; /* Mantém a proporção do GIF */
+}
+
+/* Estilo para a mensagem de erro */
+#loss p {
+    font-size: 20px; /* Tamanho da fonte */
+    color: #333; /* Cor do texto */
+    margin-top: 15px; /* Espaço acima do texto */
+}
+
+/* Ajuste no CSS para cores e feedback visual */
+.opcoes label.selected {
+    background-color: #12e61c; /* Azul para resposta correta */
+    color: white;
+}
+
+.opcoes label.incorrect {
+    background-color: #FF4C4C; /* Vermelho para resposta errada */
+    color: white; /* Opcional: torna o texto branco */
+}
+
+
+
+
 
 @media (max-width: 480px) {
-    #quiz {
+    #quiz, #intro {
         width: 94vw;
         height: 90vh;
     }
@@ -191,7 +234,7 @@ body {
 }
 
 @media (min-width: 767px) and (max-width: 991px) {
-    #quiz {
+    #quiz, #intro {
         width: 80vw;
     }
 
@@ -215,7 +258,7 @@ body {
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
-    #quiz {
+    #quiz, #intro {
         height: 90vh;
     }
 
