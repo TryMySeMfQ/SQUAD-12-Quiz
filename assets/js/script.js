@@ -169,168 +169,176 @@ const perguntas = [
     }
 ];
 
-let questaoAtual = 0;
-let respostasSelecionadas = {};
-
-const barraProgresso = document.getElementById("barra");
-const nivelTexto = document.getElementById("nivel-texto");
-const perguntaTexto = document.getElementById("pergunta-texto");
-const opcoesContainer = document.getElementById("opcoes");
-const botaoSubmit = document.getElementById("submit");
-const nivelDiv = document.getElementById("nivel");
-const introDiv = document.getElementById("intro");
-const quizDiv = document.getElementById("quiz");
-const lossDiv = document.getElementById("loss");
 const botaoIniciar = document.getElementById("start-quiz");
-const botaoRetry = document.getElementById("retry");
+    botaoIniciar.addEventListener("click", iniciarQuiz);
 
-function renderizarQuestao() {
-    const questao = perguntas[questaoAtual];
+    let questaoAtual = 0;
+    let respostasSelecionadas = {};
 
-    // Limpa o conteúdo anterior (tanto nível quanto pergunta e opções)
-    nivelTexto.textContent = "";
-    perguntaTexto.textContent = "";
-    opcoesContainer.innerHTML = ""; // Limpa as opções anteriores
+    const barraProgresso = document.getElementById("barra");
+    const nivelTexto = document.getElementById("nivel-texto");
+    const perguntaTexto = document.getElementById("pergunta-texto");
+    const opcoesContainer = document.getElementById("opcoes");
+    const botaoSubmit = document.getElementById("submit");
+    const nivelDiv = document.getElementById("nivel");
+    const lossDiv = document.getElementById("loss");
+    const victoryDiv = document.getElementById("victory");
+    const botaoRetry = document.getElementById("retry");
 
-    // Define o nível da questão
-    nivelTexto.textContent = `Nível: ${questao.nivel}`;
+    function iniciarQuiz() {
+        const divIniciar = document.getElementById("intro");
+        const divQuiz = document.getElementById("quiz");
 
-    // Define o texto da pergunta
-    perguntaTexto.textContent = `${questao.pergunta}`;
-
-    // Define a cor do nível (verde para fácil, laranja para médio e vermelho para difícil)
-    switch (questao.nivel) {
-        case "Fácil":
-            nivelDiv.style.backgroundColor = "#09b12e"; // Verde
-            break;
-        case "Médio":
-            nivelDiv.style.backgroundColor = "#FFA500"; // Laranja
-            break;
-        case "Difícil":
-            nivelDiv.style.backgroundColor = "#FF0000"; // Vermelho
-            break;
-        default:
-            nivelDiv.style.backgroundColor = "#09b12e"; // Verde padrão
+        divIniciar.style.display = "none";
+        divQuiz.style.display = "flex";
+        renderizarQuestao();
     }
 
-    // Criar as opções da pergunta
-    const opcoesContainerDiv = document.createElement("div");
-    opcoesContainerDiv.classList.add("opcoes-container");
+    function renderizarQuestao() {
+        botaoSubmit.style.display = "block";
+        const questao = perguntas[questaoAtual];
 
-    for (const [letra, texto] of Object.entries(questao.opcoes)) {
-        const label = document.createElement("label");
-        label.classList.add("opcao-label"); // Classe para estilizar o label
+        nivelTexto.textContent = `Nível: ${questao.nivel}`;
+        perguntaTexto.textContent = `${questao.pergunta}`;
+        opcoesContainer.innerHTML = ""; // Limpa opções anteriores
 
-        // Adiciona a opção com um input radio
-        label.innerHTML = 
-            `<input type="radio" name="questao" value="${letra}" class="opcao-input"> 
-            ${texto}`;
-        opcoesContainerDiv.appendChild(label);
-    }
-
-    // Adiciona as opções ao container
-    opcoesContainer.appendChild(opcoesContainerDiv);
-
-    // Reinicia o temporizador para a nova pergunta
-    temporizador();  
-}
-
-
-
-function proximaQuestao() {
-    const opcaoSelecionada = document.querySelector('input[name="questao"]:checked');
-    const questao = perguntas[questaoAtual]
-
-    if (!opcaoSelecionada) {
-        alert("Por favor, selecione uma resposta!");
-        return;
-    }
-
-    respostasSelecionadas[questaoAtual] = opcaoSelecionada.value;
-    let verificarSelecao = respostasSelecionadas[questaoAtual];
-    questaoAtual++;
-   
-    if (verificarSelecao !== questao.correta) {
-        alert("Você errou!");
-        finalizarQuiz();
-    } else {
-        if (questaoAtual < perguntas.length) {
-            renderizarQuestao();
-        } else {
-            finalizarQuiz();
+        // Define a cor do nível
+        switch (questao.nivel) {
+            case "Fácil":
+                nivelDiv.style.backgroundColor = "#09b12e"; // Verde
+                break;
+            case "Médio":
+                nivelDiv.style.backgroundColor = "#FFA500"; // Laranja
+                break;
+            case "Difícil":
+                nivelDiv.style.backgroundColor = "#FF0000"; // Vermelho
+                break;
+            default:
+                nivelDiv.style.backgroundColor = "#09b12e"; // Verde padrão
         }
-    } 
-}
 
-function finalizarQuiz() { 
-    let pontuacao = 0; 
-    perguntas.forEach((questao, index) => { 
-        if (respostasSelecionadas[index] === questao.correta) { 
-            pontuacao++; 
-        } 
-    }); 
-    opcoesContainer.innerHTML = `<p>Você acertou ${pontuacao} de ${perguntas.length} perguntas!</p>`; 
-    perguntaTexto.textContent = "Quiz Finalizado!"; 
-    botaoSubmit.style.display = "none"; 
-} 
+        const opcoesContainerDiv = document.createElement("div");
+        opcoesContainerDiv.classList.add("opcoes-container");
 
-botaoSubmit.addEventListener("click", proximaQuestao);
-renderizarQuestao();
+        for (const [letra, texto] of Object.entries(questao.opcoes)) {
+            const label = document.createElement("label");
+            label.classList.add("opcao-label");
+            label.innerHTML = `<input type="radio" name="questao" value="${letra}" class="opcao-input"> ${texto}`;
+            opcoesContainerDiv.appendChild(label);
+        }
 
-function temporizador() {
-    let nivel = perguntas[questaoAtual].nivel;
-    let valorContagem = 0;
-    let tempoTotal;
-
-
-    if (nivel === "Fácil") {
-        tempoTotal = 15;
-    } else if (nivel === "Médio") {
-        tempoTotal = 10;
-    } else if (nivel === "Difícil") {
-        tempoTotal = 5;
-    } else {
-        alert("Nível Inválido!");
-        return;
+        opcoesContainer.appendChild(opcoesContainerDiv);
+        temporizador();
     }
 
-    botaoIniciar.addEventListener("click", () => {
-        introDiv.style.display = "none";  // Esconde a introdução
-        quizDiv.style.display = "flex";   // Mostra o quiz
-        renderizarQuestao();              // Chama a primeira pergunta
-    });
-    
+    function proximaQuestao() {
+        const opcaoSelecionada = document.querySelector('input[name="questao"]:checked');
+        const questao = perguntas[questaoAtual];
+
+        if (!opcaoSelecionada) {
+            alert("Por favor, selecione uma resposta!");
+            return;
+        }
+
+        respostasSelecionadas[questaoAtual] = opcaoSelecionada.value;
+
+        // Limpa a seleção anterior
+        const labels = document.querySelectorAll('.opcao-label');
+        labels.forEach(label => {
+            label.classList.remove('selected', 'incorrect');
+        });
+
+        // Aplica a classe correta ou errada
+        labels.forEach(label => {
+            const input = label.querySelector('input');
+            if (input.value === questao.correta) {
+                label.classList.add('selected'); // Resposta correta
+            } else if (input.value === opcaoSelecionada.value) {
+                label.classList.add('incorrect'); // Resposta errada
+            }
+        });
+
+        setTimeout(() => {
+            if (opcaoSelecionada.value !== questao.correta) {
+                alert("Você errou!");
+                finalizarQuiz();
+            } else {
+                questaoAtual++;
+                if (questaoAtual < perguntas.length) {
+                    renderizarQuestao();
+                } else {
+                    finalizarQuiz();
+                }
+            }
+        }, 1000); // Delay de 1 segundo
+    }
+
+    function finalizarQuiz() {
+        let pontuacao = 0;
+        perguntas.forEach((questao, index) => {
+            if (respostasSelecionadas[index] === questao.correta) {
+                pontuacao++;
+            }
+        });
+
+        if (pontuacao === perguntas.length) {
+            victoryDiv.style.display = "block";
+            victoryDiv.querySelector("img").style.display = "block"; // Mostra o GIF de vitória
+        } else {
+            lossDiv.style.display = "block";
+            lossDiv.querySelector("img").style.display = "block"; // Mostra o GIF de perda
+        }
+
+        document.getElementById("quiz").style.display = "none"; // Esconde o quiz
+    }
+
+    function temporizador() {
+        let nivel = perguntas[questaoAtual].nivel;
+        let valorContagem = 0;
+        let tempoTotal;
+
+        if (nivel === "Fácil") {
+            tempoTotal = 15;
+        } else if (nivel === "Médio") {
+            tempoTotal = 10;
+        } else if (nivel === "Difícil") {
+            tempoTotal = 5;
+        } else {
+            alert("Nível Inválido!");
+            return;
+        }
+
+        barraProgresso.style.backgroundColor = nivelDiv.style.backgroundColor;
+        barraProgresso.style.width = "100%";
+
+        const intervalo = setInterval(() => {
+            valorContagem++;
+            const tempoRestante = tempoTotal - valorContagem;
+
+            const largura = (tempoRestante / tempoTotal) * 100;
+            barraProgresso.style.width = `${largura}%`;
+
+            if (tempoRestante <= 0) {
+                clearInterval(intervalo);
+                barraProgresso.style.width = "0%";
+                finalizarQuiz();
+            }
+        }, 1000);
+
+        botaoSubmit.onclick = function() {
+            clearInterval(intervalo);
+            proximaQuestao();
+        };
+    }
 
     botaoRetry.addEventListener("click", () => {
-        lossDiv.style.display = "none";     // Esconde o GIF de perda
-        questaoAtual = 0;                   // Reinicia a contagem de perguntas
-        respostasSelecionadas = {};          // Reseta as respostas
-        quizDiv.style.display = "flex";      // Mostra o quiz novamente
-        renderizarQuestao();                 // Chama a primeira pergunta
+        lossDiv.style.display = "none"; // Esconde a div de perda
+        questaoAtual = 0;               // Reinicia a contagem de perguntas
+        respostasSelecionadas = {};      // Reseta as respostas
+        barraProgresso.style.width = "100%"; // Reseta a barra de progresso
+        barraProgresso.style.display = "block";
+        document.getElementById("quiz").style.display = "flex"; // Mostra o quiz novamente
+        renderizarQuestao();             // Chama a primeira pergunta
+        temporizador();                   // Inicia o temporizador
     });
-    
-    barraProgresso.style.backgroundColor = nivelDiv.style.backgroundColor;
-    barraProgresso.style.width = "100%";
-
-    const intervalo = setInterval(() => {
-        valorContagem++;
-        const tempoRestante = tempoTotal - valorContagem;
-
-        const largura = (tempoRestante / tempoTotal) * 100;
-        barraProgresso.style.width = `${largura}%`;
-
-        if (tempoRestante <= 0) {
-            clearInterval(intervalo);
-            barraProgresso.style.width = "0%";
-            barraProgresso.textContent = " ";
-            finalizarQuiz();
-        }
-    }, 1000); 
-
-    botaoSubmit.addEventListener("click", function() {
-        clearInterval(intervalo); 
-    });
-
-    
-
-}});
+});
