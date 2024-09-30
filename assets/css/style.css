@@ -1,3 +1,12 @@
+
+:root{
+    --main-color: #38F9D7;
+    --text-color: #ffffff;
+    --bg-color-01: #43E97B;
+    --text-color-02: #00b7ff;
+    --text-color-03: #007BFF;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -83,7 +92,7 @@ body {
 }
 
 .opcoes label {
-    display: flex;
+    display: inline block; 
     align-items: center;
     font-size: 18px;
     color: #495057;
@@ -94,17 +103,23 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+
+
 .opcoes label:hover {
+    box-shadow: 0 0 0.3rem var(--main-color);
+    background-color: inherit;
+    color: var(--text-color);
     cursor: pointer;
     transition: 0.4s ease-in-out;
-    background-color: #e9ecef; 
+    background-color: var(--main-color); 
 }
 
 .opcoes input {
+    display: block;
     appearance: none;
     width: 1.8rem;
     height: 1.8rem;
-    border: 2px solid #bdc5db;
+    border: 2px solid var(--main-color);
     border-radius: 50%;
     cursor: pointer;
     margin-right: 1rem;
@@ -112,10 +127,35 @@ body {
 }
 
 .opcoes input:checked {
-    border: #00B7FF;
-    background-color: #00b7ff;
+    box-shadow: 0 0 0.4rem rgb(255, 255, 255);
+    background-color: inherit;
+    color: var(--text-color);
+    cursor: pointer;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    background-color: var(--main-color); 
 }
 
+#start-quiz{
+
+    font-family:'Arial Narrow Bold', sans-serif;
+    border-color: var(--text-color);
+    display: inline-block;
+    padding: 0.7rem 1.8rem;
+    background-color: var(--main-color);
+    border-radius: 2rem;
+    color: var(--text-color);
+    font-weight: 600;
+    transition: 0.3s ease;
+    margin-top: 1.2rem;
+}
+
+#start-quiz:hover{
+    box-shadow: 0 0 0.3rem var(--main-color);
+    background-color: inherit;
+    color: var(--main-color);
+    cursor: pointer;
+}
 #submit, #start-quiz {
     background-color: #38B6FF;
     border: none;
@@ -145,6 +185,39 @@ body {
     color: #333;
 }
 
+.opcoes {
+    overflow: hidden;
+	overflow-y: scroll;
+    height: 35vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.opcoes label {
+    display: inline block; 
+    align-items: center;
+    font-size: 18px;
+    color: #495057;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.opcoes input {
+    display: block;
+    appearance: none;
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 2px solid var(--main-color);
+    border-radius: 50%;
+    cursor: pointer;
+    margin-right: 1rem;
+
+}
+
 /* Estilo para o bloco de opções */
 .opcoes-container {
     display: flex;
@@ -152,28 +225,7 @@ body {
 }
 
 /* Estilo para o input de opções */
-.opcao-input {
-    margin-right: 10px;
-    /* Coloque aqui o estilo do seu input, como cor de fundo, borda, etc */
-    border: 2px solid #09b12e;
-    border-radius: 5px;
-    padding: 5px;
-    width: 20px;
-    height: 20px;
-}
 
-/* Estilo para o label das opções */
-.opcao-label {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-    font-size: 16px;
-    color: #666;
-}
-
-.opcao-label input {
-    margin-right: 10px;
-}
 
 #loss {
     display: none; /* Inicialmente escondido */
