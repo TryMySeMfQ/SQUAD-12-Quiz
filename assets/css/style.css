@@ -178,7 +178,7 @@ body {
     transition: .3s all ease-in-out;
 }
 
-/* Estilo para o bloco da pergunta */
+
 .pergunta-container {
     margin-bottom: 10px;
     font-size: 18px;
@@ -218,55 +218,106 @@ body {
 
 }
 
-/* Estilo para o bloco de opções */
 .opcoes-container {
     display: flex;
     flex-direction: column;
 }
 
-/* Estilo para o input de opções */
-
-
 #loss {
-    display: none; /* Inicialmente escondido */
-    position: fixed; /* Fixa na tela */
-    top: 50%; /* Centraliza verticalmente */
-    left: 50%; /* Centraliza horizontalmente */
-    transform: translate(-50%, -50%); /* Ajusta para o centro */
-    z-index: 1000; /* Para ficar acima de outros elementos */
-    background-color: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente branco */
-    padding: 20px; /* Espaçamento interno */
-    border-radius: 10px; /* Bordas arredondadas */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra para destaque */
-    text-align: center; /* Centraliza texto */
+    display: none; 
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    z-index: 1000; 
+    background-color: rgba(255, 255, 255, 0.9); 
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+    text-align: center; 
 }
 
-/* Estilo para o GIF dentro da div de perda */
 #loss img {
-    max-width: 100%; /* Adapta o tamanho do GIF à largura do contêiner */
-    height: auto; /* Mantém a proporção do GIF */
+    max-width: 100%; 
+    height: auto; 
 }
 
-/* Estilo para a mensagem de erro */
 #loss p {
-    font-size: 20px; /* Tamanho da fonte */
-    color: #333; /* Cor do texto */
-    margin-top: 15px; /* Espaço acima do texto */
+    font-size: 20px; 
+    color: #333; 
+    margin-top: 15px; 
 }
 
-/* Ajuste no CSS para cores e feedback visual */
 .opcoes label.selected {
-    background-color: #12e61c; /* Azul para resposta correta */
+    background-color: #12e61c; 
     color: white;
 }
 
 .opcoes label.incorrect {
-    background-color: #FF4C4C; /* Vermelho para resposta errada */
-    color: white; /* Opcional: torna o texto branco */
+    background-color: #FF4C4C; 
+    color: white; 
 }
 
+.victory, .loss {
+    display: none; 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 10px; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
+    padding: 20px;
+    text-align: center; 
+    z-index: 1000; 
+}
 
+.victory {
+    background-color: #09b12e; 
+    color: white; 
+}
 
+.victory h1 {
+    font-size: 2.5em; 
+}
+
+.victory img {
+    display: block; 
+    margin: 20px auto; 
+    max-width: 80%; 
+    height: auto; 
+}
+
+.loss {
+    background-color: #FF0000; 
+    color: white; 
+}
+
+.loss h1 {
+    font-size: 2.5em; 
+}
+
+.loss img {
+    display: block; 
+    margin: 20px auto; 
+    max-width: 80%; 
+    height: auto; 
+}
+
+.button-retry {
+    background-color: #FFA500; 
+    color: white; 
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-retry:hover {
+    background-color: #FF8C00; 
+}
 
 
 @media (max-width: 480px) {
