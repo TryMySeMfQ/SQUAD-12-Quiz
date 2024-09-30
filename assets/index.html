@@ -29,18 +29,20 @@
         <button id="submit">Próxima Questão</button>
     </div>
 
-    <div id="loss" style="display: none;">
-        <h2>Você perdeu!</h2>
-        <img src="/assets/img/piesek-pies.gif" alt="Gif triste">
-        <button id="retry">Tentar Novamente</button>
-    </div>
-    
-    <div id="victory" style="display: none;">
-        <h2>Parabéns, você ganhou!</h2>
-        <img src="/assets/img/dog-smile-shyboos.gif" alt="Gif de vitória">
-        <button id="retry-victory">Tentar Novamente</button>
-    </div>
-    
+  
+<!-- Tela de Vitória -->
+<div class="victory" id="victory">
+    <h1>Parabéns! Você venceu!</h1>
+    <img src="/assets/img/dog-smile-shyboos.gif" alt="Gif de vitória">
+    <button class="button-retry" id="retry-victory">Tentar Novamente</button>
+</div>
+
+<!-- Tela de Perda -->
+<div class="loss" id="loss">
+    <h1>Que pena! Você perdeu!</h1>
+    <img src="/assets/img/piesek-pies.gif" alt="Gif de perda">
+    <button class="button-retry" id="retry">Tentar Novamente</button>
+</div>
 
     <!-- Importando o arquivo JavaScript -->
     <script src="./js/script.js"></script>
