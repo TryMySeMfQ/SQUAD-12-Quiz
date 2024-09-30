@@ -169,18 +169,6 @@ const perguntas = [
     }
 ];
 
-const botaoIniciar = document.getElementById("start-quiz");
-botaoIniciar.addEventListener("click", iniciarQuiz);
-
-function iniciarQuiz() {
-    const divIniciar = document.getElementById("intro");
-    const divQuiz = document.getElementById("quiz");
-    
-    divIniciar.style.display = "none"
-    divQuiz.style.display = "flex"
-    renderizarQuestao();
-}
-
 let questaoAtual = 0;
 let respostasSelecionadas = {};
 
@@ -190,13 +178,27 @@ const perguntaTexto = document.getElementById("pergunta-texto");
 const opcoesContainer = document.getElementById("opcoes");
 const botaoSubmit = document.getElementById("submit");
 const nivelDiv = document.getElementById("nivel");
+const introDiv = document.getElementById("intro");
+const quizDiv = document.getElementById("quiz");
+const lossDiv = document.getElementById("loss");
+const botaoIniciar = document.getElementById("start-quiz");
+const botaoRetry = document.getElementById("retry");
 
 function renderizarQuestao() {
     const questao = perguntas[questaoAtual];
-    nivelTexto.textContent = `Nível: ${questao.nivel}`;
-    perguntaTexto.textContent = questao.pergunta;
+
+    // Limpa o conteúdo anterior (tanto nível quanto pergunta e opções)
+    nivelTexto.textContent = "";
+    perguntaTexto.textContent = "";
     opcoesContainer.innerHTML = ""; // Limpa as opções anteriores
-    // Define a cor do nível
+
+    // Define o nível da questão
+    nivelTexto.textContent = `Nível: ${questao.nivel}`;
+
+    // Define o texto da pergunta
+    perguntaTexto.textContent = `${questao.pergunta}`;
+
+    // Define a cor do nível (verde para fácil, laranja para médio e vermelho para difícil)
     switch (questao.nivel) {
         case "Fácil":
             nivelDiv.style.backgroundColor = "#09b12e"; // Verde
@@ -211,17 +213,29 @@ function renderizarQuestao() {
             nivelDiv.style.backgroundColor = "#09b12e"; // Verde padrão
     }
 
+    // Criar as opções da pergunta
+    const opcoesContainerDiv = document.createElement("div");
+    opcoesContainerDiv.classList.add("opcoes-container");
+
     for (const [letra, texto] of Object.entries(questao.opcoes)) {
         const label = document.createElement("label");
+        label.classList.add("opcao-label"); // Classe para estilizar o label
+
+        // Adiciona a opção com um input radio
         label.innerHTML = 
-            `<input type="radio" name="questao" value="${letra}">
+            `<input type="radio" name="questao" value="${letra}" class="opcao-input"> 
             ${texto}`;
-        opcoesContainer.appendChild(label);
+        opcoesContainerDiv.appendChild(label);
     }
-    
-    
-    temporizador();
+
+    // Adiciona as opções ao container
+    opcoesContainer.appendChild(opcoesContainerDiv);
+
+    // Reinicia o temporizador para a nova pergunta
+    temporizador();  
 }
+
+
 
 function proximaQuestao() {
     const opcaoSelecionada = document.querySelector('input[name="questao"]:checked');
@@ -258,8 +272,10 @@ function finalizarQuiz() {
     opcoesContainer.innerHTML = `<p>Você acertou ${pontuacao} de ${perguntas.length} perguntas!</p>`; 
     perguntaTexto.textContent = "Quiz Finalizado!"; 
     botaoSubmit.style.display = "none"; 
-    barraProgresso.style.display = "none"; 
 } 
+
+botaoSubmit.addEventListener("click", proximaQuestao);
+renderizarQuestao();
 
 function temporizador() {
     let nivel = perguntas[questaoAtual].nivel;
@@ -277,6 +293,21 @@ function temporizador() {
         alert("Nível Inválido!");
         return;
     }
+
+    botaoIniciar.addEventListener("click", () => {
+        introDiv.style.display = "none";  // Esconde a introdução
+        quizDiv.style.display = "flex";   // Mostra o quiz
+        renderizarQuestao();              // Chama a primeira pergunta
+    });
+    
+
+    botaoRetry.addEventListener("click", () => {
+        lossDiv.style.display = "none";     // Esconde o GIF de perda
+        questaoAtual = 0;                   // Reinicia a contagem de perguntas
+        respostasSelecionadas = {};          // Reseta as respostas
+        quizDiv.style.display = "flex";      // Mostra o quiz novamente
+        renderizarQuestao();                 // Chama a primeira pergunta
+    });
     
     barraProgresso.style.backgroundColor = nivelDiv.style.backgroundColor;
     barraProgresso.style.width = "100%";
@@ -301,5 +332,5 @@ function temporizador() {
     });
 
     
-    botaoSubmit.addEventListener("click", proximaQuestao);    
+
 }});
