@@ -36,6 +36,22 @@ body {
 	}
 }
 
+/* Estilo para o nome do usuário ou título */
+#nome-usuario {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0056b3;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase; /* Coloca o texto todo em maiúsculas */
+    letter-spacing: 1.5px;     /* Aumenta o espaçamento entre as letras */
+}
+
+#nome-usuario span {
+    color: #FFA500; /* Cor de destaque para o nome ou parte do texto */
+}
+
+
 #intro { text-align: center; }
 
 #quiz, #intro{
@@ -241,7 +257,7 @@ body {
     transform: translate(-50%, -50%);
     background-color: white; 
     border-radius: 10px; 
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
+    box-shadow: 10px 10px 0px 0px rgba(125, 121, 121, 0.75);
     padding: 20px;
     text-align: center; 
     z-index: 1000; 
@@ -250,8 +266,8 @@ body {
 }
 
 .victory {
-    background-color: #09b12e; 
-    color: white; 
+    background-color: #f8f9fa; 
+    color: rgb(146, 235, 129); 
 }
 
 .victory h1 {
@@ -260,8 +276,8 @@ body {
 
 
 .loss {
-    background-color: #FF0000; 
-    color: white; 
+    background-color: #f8f9fa; 
+    color: rgb(241, 172, 172); 
 }
 
 .loss h1 {
