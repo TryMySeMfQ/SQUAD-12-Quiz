@@ -169,8 +169,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     ];
     
-    const botaoIniciar = document.getElementById("start-quiz");
-        botaoIniciar.addEventListener("click", iniciarQuiz);
+        const botaoIniciar = document.getElementById("start-quiz");
+        const nomeUsuarioInput = document.getElementById("nome-usuario");
+        let nomeUsuario = '';
+    
+        botaoIniciar.addEventListener("click", () => {
+            nomeUsuario = nomeUsuarioInput.value.trim();
+            if (nomeUsuario === "") {
+                alert("Por favor, insira seu nome para começar o quiz.");
+            } else {
+                iniciarQuiz();
+            }
+        });
     
         let questaoAtual = 0;
         let respostasSelecionadas = {};
@@ -285,9 +295,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (pontuacao === perguntas.length) {
                 victoryDiv.style.display = "block";
                 victoryDiv.querySelector("img").style.display = "block"; // Mostra o GIF de vitória
+                alert(`Parabéns, ${nomeUsuario}! Você acertou todas as perguntas!`);
             } else {
                 lossDiv.style.display = "block";
                 lossDiv.querySelector("img").style.display = "block"; // Mostra o GIF de perda
+                alert(`Que pena, ${nomeUsuario}. Tente novamente!`);
             }
     
             document.getElementById("quiz").style.display = "none"; // Esconde o quiz
@@ -340,7 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("quiz").style.display = "flex"; // Mostra o quiz novamente
             renderizarQuestao();            // Chama a primeira pergunta
         });
-        
+    
         botaoRetryvictory.addEventListener("click", () => {
             victoryDiv.style.display = "none"; // Esconde a div de vitória
             questaoAtual = 0;                  // Reinicia a contagem de perguntas
@@ -350,3 +362,4 @@ document.addEventListener("DOMContentLoaded", () => {
             renderizarQuestao();               // Chama a primeira pergunta
         });
     });
+    
