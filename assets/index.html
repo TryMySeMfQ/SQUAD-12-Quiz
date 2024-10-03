@@ -11,7 +11,10 @@
     <div id="intro">
         <h1>Bem-vindo ao Quiz - SQUAD -12!</h1>
         <p>Teste seus conhecimentos sobre computadores e tecnologia. Boa sorte!</p>
+        <label for="nome-usuario">Digite seu nome:</label>
+        <input type="text" id="nome-usuario" placeholder="Digite seu nome">
         <button id="start-quiz">Começar o Quiz</button>
+        <p id="erro-nome" style="color: red; display: none;">Por favor, insira seu nome.</p>
     </div>
     <div id="quiz" style="display: none;">
         <div id="questoes-quiz">
@@ -32,7 +35,7 @@
   
 <!-- Tela de Vitória -->
 <div class="victory" id="victory">
-    <h1>Parabéns! Você venceu!</h1>
+    <h1>Parabéns! Você venceu! Foi longe!</h1>
     <img src="/assets/img/dog-smile-shyboos.gif" alt="Gif de vitória">
     <button class="button-retry" id="retry-victory">Tentar Novamente</button>
 </div>
