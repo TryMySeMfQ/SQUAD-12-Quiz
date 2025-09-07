@@ -31,17 +31,13 @@ Neste projeto, atuei como **líder da equipe**, coordenando o desenvolvimento e 
  ┣ 📂 js          # Scripts do quiz
  ┣ 📜 index.html  # Página principal do quiz
  ┗ 📜 README.md   # Documentação do projeto
-
+```
 ---
 
 ## 👥 Equipe
 
-- **Líder:** [Seu Nome]  
+- **Líder:** Julia Tito  
 - **Desenvolvedores:** [Nome1], [Nome2], [Nome3]  
 
 ---
 
-## 📧 Contato
-
-- **LinkedIn:** [linkedin.com/in/seuusuario](https://linkedin.com/in/seuusuario)  
-- **GitHub:** [github.com/seuusuario](https://github.com/seuusuario)
