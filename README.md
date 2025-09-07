@@ -37,7 +37,7 @@ Neste projeto, atuei como **líder da equipe**, coordenando o desenvolvimento e 
 ## 👥 Equipe
 
 - **Líder:** Julia Tito  
-- **Desenvolvedores:** [Nome1], [Nome2], [Nome3]  
+- **Desenvolvedores:** Nataly, [Nome2], [Nome3]  
 
 ---
 
