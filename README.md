@@ -37,7 +37,7 @@ Neste projeto, atuei como **líder da equipe**, coordenando o desenvolvimento e 
 ## 👥 Equipe
 
 - **Líder:** Julia Tito  
-- **Desenvolvedores:** Nataly, Mario, Suelen , claudio  
+- **Desenvolvedores:** Nataly, Mario, Suelen , Claudio e Victor 
 
 ---
 
